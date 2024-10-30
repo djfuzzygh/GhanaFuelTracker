@@ -1,0 +1,8 @@
+export const MOMO_CONFIG = {
+    API_URL: 'https://sandbox.momodeveloper.mtn.com',
+    COLLECTION_PRIMARY_KEY: 'jXMJnDLCJ4jDD7GAQ2mSIha6VgkoKAwp',
+    COLLECTION_USER_ID: 'YOUR_USER_ID',
+    SUBSCRIPTION_AMOUNT: 10,
+    CURRENCY: 'GHS',
+    SUBSCRIPTION_DURATION_DAYS: 30
+  };

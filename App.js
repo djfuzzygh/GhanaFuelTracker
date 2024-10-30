@@ -1,20 +1,50 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { AuthProvider } from './context/AuthContext';
+import { PaymentProvider } from './context/PaymentContext';
+import LoginScreen from './screens/LoginScreen';
+import SignupScreen from './screens/SignupScreen';
+import HomeScreen from './screens/HomeScreen';
+import ExpenseForm from './components/ExpenseForm';
+import FuelCardManager from './components/FuelCardManager';
+import SubscriptionScreen from './components/SubscriptionScreen';
+import SettingsScreen from './screens/SettingsScreen';
 
-export default function App() {
+const Stack = createNativeStackNavigator();
+
+function AppContent() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator
+        screenOptions={{
+          headerStyle: {
+            backgroundColor: '#4a90e2',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+        }}
+      >
+        <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="Signup" component={SignupScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="Home" component={HomeScreen} options={{ title: 'Fuel Tracker' }} />
+        <Stack.Screen name="AddExpense" component={ExpenseForm} options={{ title: 'Add Expense' }} />
+        <Stack.Screen name="FuelCards" component={FuelCardManager} options={{ title: 'Fuel Cards' }} />
+        <Stack.Screen name="Subscription" component={SubscriptionScreen} options={{ title: 'Subscription' }} />
+        <Stack.Screen name="Settings" component={SettingsScreen} options={{ title: 'Settings' }} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default function App() {
+  return (
+    <AuthProvider>
+      <PaymentProvider>
+        <AppContent />
+      </PaymentProvider>
+    </AuthProvider>
+  );
+}
